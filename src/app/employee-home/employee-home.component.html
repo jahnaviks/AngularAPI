@@ -1,0 +1,186 @@
+<div class="container">
+
+  <h3>Employee List</h3>
+  <a (click)="ShowRegForm(e)">Click here to Add New Row</a>
+  <!-- <p>Click a row to edit or delete</p> -->
+  <!-- <table class="table table-condensed" border="1">
+    <thead>
+      <tr>
+        <td>  &nbsp; </td>
+        <td>  &nbsp;  </td>
+        <td>  &nbsp;  </td>
+        <td>  &nbsp;  </td>
+        <td>  <a (click)="ShowRegForm(e)">Add New</a></td>
+      </tr> 
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>PhoneNo</th>
+        <th>Password</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="success" *ngFor="let e of employeelist ">
+        <td> {{e.id}}</td>
+        <td>{{e.FirstName}}</td>
+        <td>{{e.LastName}}</td>
+        <td>{{e.Email}}</td>
+        <td>{{e.Address}}</td>
+        <td>{{e.PhoneNumber}}</td>
+        <td>{{e.Password}}</td>            
+        <td><a (click)="ShowRegForm(e)">Edit</a></td>
+        <td><a (click)="ShowRegFormForDelete(e)">Delete</a></td>
+      </tr>
+    </tbody>
+  </table> -->
+
+
+  <div class="mat-elevation-z8">  
+    <table mat-table [dataSource]="employeelist" matSort>  
+    
+      <ng-container matColumnDef="id">  
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>  
+        <td mat-cell *matCellDef="let user"> {{user.id}} </td>  
+      </ng-container>  
+    
+      <ng-container matColumnDef="FirstName">  
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>  
+        <td mat-cell *matCellDef="let user"> {{user.FirstName}} </td>  
+      </ng-container>  
+    
+      <ng-container matColumnDef="LastName">  
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>  
+        <td mat-cell *matCellDef="let user"> {{user.LastName}} </td>  
+      </ng-container>
+
+          <ng-container matColumnDef="Email">  
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email Id </th>  
+            <td mat-cell *matCellDef="let user"> {{user.Email}} </td>  
+          </ng-container>      
+        
+    
+          <ng-container matColumnDef="Address">  
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>  
+            <td mat-cell *matCellDef="let user"> {{user.Address}} </td>  
+          </ng-container>  
+    
+          <ng-container matColumnDef="PhoneNumber">  
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>  
+            <td mat-cell *matCellDef="let user"> {{user.PhoneNumber}} </td>  
+          </ng-container>  
+    
+          <ng-container matColumnDef="Password">  
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Password </th>  
+            <td mat-cell *matCellDef="let user"> {{user.Password}} </td>  
+          </ng-container>  
+
+<!--           
+          <ng-container matColumnDef="PhoneNumber">  
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </th>  
+            <td mat-cell *matCellDef="let user"> {{user.PhoneNumber}} </td>  
+          </ng-container>  
+    
+          <ng-container matColumnDef="Password">  
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Password </th>  
+            <td mat-cell *matCellDef="let user"> {{user.Password}} </td>  
+          </ng-container>   -->
+          <!-- <ng-container matColumnDef="Edit">  
+            <th mat-header-cell> Edit </th>  
+            <td> <a (click)="ShowRegForm(e)">Edit</a> </td>  
+            </ng-container>
+          
+            <ng-container matColumnDef="Delete">  
+            <th mat-header-cell> Delete </th>  
+            <td> <a (click)="ShowRegFormForDelete(e)">Delete</a> </td>  
+            </ng-container> -->
+          
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="ShowRegForm(row)" ></tr>  
+    </table>  
+    
+    <mat-paginator [pageSizeOptions]="[5, 10, 25,50,75, 100]"></mat-paginator>  
+  </div>  
+
+
+
+
+</div>
+<hr >
+
+<form #regForm="ngForm" name="regForm" >
+<div class="container" *ngIf="editCustomer">
+  <h3>{{FormHeader}}</h3>
+  <table class="table table-condensed">
+    <tbody>
+      <tr>
+        <td><label for="fname">First Name</label></td>
+        <td><input type="text" class="form-control" name="fname" [(ngModel)]="FirstName" #fname="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && fname.invalid }" pattern="^[a-zA-Z ]{6,75}$" required/>
+          <div *ngIf="regForm.submitted && fname.invalid" class="invalid-feedback">
+              <div *ngIf="fname.errors.required">First Name is required</div>
+              <!-- <div *ngIf="fname.errors.minlength">Minimum length is 6</div> -->
+              <div *ngIf="fname.errors.pattern">Accepts alphabets and spaces only of minimum 6 and maximum 75 characters</div>
+          </div></td>
+        </tr>
+        <tr>
+        <td><label for="lname">Last Name</label></td>
+        <td><input type="text" class="form-control" name="lname" [(ngModel)]="LastName" #lname="ngModel"  [ngClass]="{ 'is-invalid': regForm.submitted && lname.invalid }"  pattern="^[a-zA-Z ]{6,75}$" required />
+          <div *ngIf="regForm.submitted && lname.invalid" class="invalid-feedback">
+              <div *ngIf="lname.errors.required">Last Name is required</div>
+              <!-- <div *ngIf="lname.errors.minlength">Minimum length is 6</div> -->
+              <div *ngIf="lname.errors.pattern">Accepts alphabets and spaces only of minimum 6 and maximum 75 characters</div>
+          </div></td>
+        </tr>
+        <tr>
+        <td><label for="Email">Email</label> </td>
+        <td><input type="email" name="email" [(ngModel)]='Email' #email="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && email.invalid }" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+          <div *ngIf="regForm.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.pattern">Email must be a valid email address</div>
+        </div></td>
+        </tr>
+        <tr>
+            <td><label for="Address">Address</label> </td>
+            <td><input type="text" name="address" [(ngModel)]='Address' #address="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && address.invalid }" required minlength="6" maxlength="100">
+              <div *ngIf="regForm.submitted && address.invalid" class="invalid-feedback">
+                <div *ngIf="address.errors.required">Address is required</div>
+                <div *ngIf="address.errors.minlength">Minimum length is 6</div>
+                <div *ngIf="address.errors.maxlength">Maximum length is 100</div>
+            </div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="PhoneNumber">PhoneNumber</label> </td>
+            <td><input name="PhoneNo" [(ngModel)]='PhoneNumber' #PhoneNo="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && PhoneNo.invalid }"  required pattern="^[0-9]{10}$" >
+              <div *ngIf="regForm.submitted && PhoneNo.invalid" class="invalid-feedback">
+                <div *ngIf="PhoneNo.errors.required">Phone Number is required</div>
+                <div *ngIf="PhoneNo.errors.pattern">allows only 10 numbers</div>
+                <!-- <div *ngIf="PhoneNo.errors.maxlength">MAximum length is 10</div> -->
+            </div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="Password">Password</label></td>
+            <td><input type="text" name="pswd" [(ngModel)]='Password' #pswd="ngModel" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,60}$"  [ngClass]="{ 'is-invalid': regForm.submitted && Password.invalid }">
+              <div *ngIf="regForm.submitted && pswd.invalid" class="invalid-feedback">
+                <div *ngIf="pswd.errors.required">Password is required</div>
+                <!-- <div *ngIf="pswd.errors.minlength">Minimum length is 8</div> -->
+                <div *ngIf="pswd.errors.pattern">Minimum 8 and maximum 60 characters atleast 1 Alphabet, 1 Number and 1 Special Character</div>
+            </div>
+              </td>
+        </tr>
+        <tr>
+        <td><input type="hidden" name="id" [(ngModel)]='id'></td>
+        <td><input type="submit" value={{FormHeader}} (click)="Save(regForm)"></td>
+        <td><input *ngIf="delete" type="submit" value="Delete" (click)="ShowRegFormForDelete(regForm)"></td>
+
+      </tr>
+    </tbody>
+  </table>
+ </div>
+</form>
