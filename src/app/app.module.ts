@@ -8,6 +8,7 @@ import { EmployeeHomeComponent } from './employee-home/employee-home.component';
 import { AngularmaterialModule } from './material/angularmaterial/angularmaterial.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';  
 import {EmployeeDataService} from './DataServices/EmployeeDataService';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { interceptor } from './interceptor';
 
 @NgModule({
@@ -17,7 +18,7 @@ import {EmployeeDataService} from './DataServices/EmployeeDataService';
     EmployeeHomeComponent
   ],
   imports: [
-    BrowserModule,HttpClientModule,FormsModule,AngularmaterialModule,BrowserAnimationsModule
+    BrowserModule,HttpClientModule,FormsModule,AngularmaterialModule,BrowserAnimationsModule, NgbModule.forRoot()
   ],
   providers: [EmployeeDataService],//{provide:HTTP_INTERCEPTORS,useClass:interceptor, multi: true}],
   bootstrap: [AppComponent]

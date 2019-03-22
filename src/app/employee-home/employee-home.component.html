@@ -1,7 +1,10 @@
 <div class="container">
 
-  <h3>Employee List</h3>
-  <a (click)="ShowRegForm(e)">Click here to Add New Row</a>
+  <h3>Registered Users List</h3>
+  <input type="button" class="btn btn-info" (click)="ShowRegForm(e)" value="Click to Add">
+  <br/>
+  <br/>
+  <!-- <a (click)="ShowRegForm(e)">Click here to Add New Row</a> -->
   <!-- <p>Click a row to edit or delete</p> -->
   <!-- <table class="table table-condensed" border="1">
     <thead>
@@ -41,7 +44,7 @@
 
 
   <div class="mat-elevation-z8">  
-    <table mat-table [dataSource]="employeelist" matSort>  
+    <table mat-table [dataSource]="employeelist" matSort class="table table-inverse table-hover">  
     
       <ng-container matColumnDef="id">  
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>  
@@ -120,34 +123,34 @@
     <tbody>
       <tr>
         <td><label for="fname">First Name</label></td>
-        <td><input type="text" class="form-control" name="fname" [(ngModel)]="FirstName" #fname="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && fname.invalid }" pattern="^[a-zA-Z ]{6,75}$" required/>
-          <div *ngIf="regForm.submitted && fname.invalid" class="invalid-feedback">
+        <td><input type="text" class="form-control col-xs-4" name="fname" [(ngModel)]="FirstName" #fname="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && fname.invalid }" pattern="^[a-zA-Z 0-9]{6,75}$" required/>
+          <div *ngIf="regForm.submitted && fname.invalid" class="alert alert-danger col-xs-4">
               <div *ngIf="fname.errors.required">First Name is required</div>
               <!-- <div *ngIf="fname.errors.minlength">Minimum length is 6</div> -->
-              <div *ngIf="fname.errors.pattern">Accepts alphabets and spaces only of minimum 6 and maximum 75 characters</div>
+              <div *ngIf="fname.errors.pattern">Accepts alphabets, numbers and spaces only of minimum 6 and maximum 75 characters</div>
           </div></td>
         </tr>
         <tr>
         <td><label for="lname">Last Name</label></td>
-        <td><input type="text" class="form-control" name="lname" [(ngModel)]="LastName" #lname="ngModel"  [ngClass]="{ 'is-invalid': regForm.submitted && lname.invalid }"  pattern="^[a-zA-Z ]{6,75}$" required />
-          <div *ngIf="regForm.submitted && lname.invalid" class="invalid-feedback">
+        <td><input type="text" class="form-control col-xs-4" name="lname" [(ngModel)]="LastName" #lname="ngModel"  [ngClass]="{ 'is-invalid': regForm.submitted && lname.invalid }"  pattern="^[a-zA-Z 0-9]{6,75}$" required />
+          <div *ngIf="regForm.submitted && lname.invalid" class="alert alert-danger col-xs-4">
               <div *ngIf="lname.errors.required">Last Name is required</div>
               <!-- <div *ngIf="lname.errors.minlength">Minimum length is 6</div> -->
-              <div *ngIf="lname.errors.pattern">Accepts alphabets and spaces only of minimum 6 and maximum 75 characters</div>
+              <div *ngIf="lname.errors.pattern">Accepts alphabets, numbers and spaces only of minimum 6 and maximum 75 characters</div>
           </div></td>
         </tr>
         <tr>
         <td><label for="Email">Email</label> </td>
-        <td><input type="email" name="email" [(ngModel)]='Email' #email="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && email.invalid }" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-          <div *ngIf="regForm.submitted && email.invalid" class="invalid-feedback">
+        <td><input type="email" class="form-control col-xs-4" name="email" [(ngModel)]='Email' #email="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && email.invalid }" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+          <div *ngIf="regForm.submitted && email.invalid" class="alert alert-danger col-xs-4">
             <div *ngIf="email.errors.required">Email is required</div>
             <div *ngIf="email.errors.pattern">Email must be a valid email address</div>
         </div></td>
         </tr>
         <tr>
             <td><label for="Address">Address</label> </td>
-            <td><input type="text" name="address" [(ngModel)]='Address' #address="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && address.invalid }" required minlength="6" maxlength="100">
-              <div *ngIf="regForm.submitted && address.invalid" class="invalid-feedback">
+            <td><input type="text" class="form-control col-xs-4" name="address" [(ngModel)]='Address' #address="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && address.invalid }" required minlength="6" maxlength="100">
+              <div *ngIf="regForm.submitted && address.invalid" class="alert alert-danger col-xs-4">
                 <div *ngIf="address.errors.required">Address is required</div>
                 <div *ngIf="address.errors.minlength">Minimum length is 6</div>
                 <div *ngIf="address.errors.maxlength">Maximum length is 100</div>
@@ -156,8 +159,8 @@
         </tr>
         <tr>
             <td><label for="PhoneNumber">PhoneNumber</label> </td>
-            <td><input name="PhoneNo" [(ngModel)]='PhoneNumber' #PhoneNo="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && PhoneNo.invalid }"  required pattern="^[0-9]{10}$" >
-              <div *ngIf="regForm.submitted && PhoneNo.invalid" class="invalid-feedback">
+            <td><input name="PhoneNo" class="form-control col-xs-4" [(ngModel)]='PhoneNumber' #PhoneNo="ngModel" [ngClass]="{ 'is-invalid': regForm.submitted && PhoneNo.invalid }"  required pattern="^[0-9]{10}$" >
+              <div *ngIf="regForm.submitted && PhoneNo.invalid" class="alert alert-danger col-xs-4">
                 <div *ngIf="PhoneNo.errors.required">Phone Number is required</div>
                 <div *ngIf="PhoneNo.errors.pattern">allows only 10 numbers</div>
                 <!-- <div *ngIf="PhoneNo.errors.maxlength">MAximum length is 10</div> -->
@@ -166,8 +169,8 @@
         </tr>
         <tr>
             <td><label for="Password">Password</label></td>
-            <td><input type="text" name="pswd" [(ngModel)]='Password' #pswd="ngModel" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,60}$"  [ngClass]="{ 'is-invalid': regForm.submitted && Password.invalid }">
-              <div *ngIf="regForm.submitted && pswd.invalid" class="invalid-feedback">
+            <td><input type="text" class="form-control col-xs-4" name="pswd" [(ngModel)]='Password' #pswd="ngModel" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,60}$"  [ngClass]="{ 'is-invalid': regForm.submitted && Password.invalid }">
+              <div *ngIf="regForm.submitted && pswd.invalid" class="alert alert-danger col-xs-4">
                 <div *ngIf="pswd.errors.required">Password is required</div>
                 <!-- <div *ngIf="pswd.errors.minlength">Minimum length is 8</div> -->
                 <div *ngIf="pswd.errors.pattern">Minimum 8 and maximum 60 characters atleast 1 Alphabet, 1 Number and 1 Special Character</div>
@@ -176,8 +179,8 @@
         </tr>
         <tr>
         <td><input type="hidden" name="id" [(ngModel)]='id'></td>
-        <td><input type="submit" value={{FormHeader}} (click)="Save(regForm)"></td>
-        <td><input *ngIf="delete" type="submit" value="Delete" (click)="ShowRegFormForDelete(regForm)"></td>
+        <td><input type="submit" class="btn btn-info" value={{FormHeader}} (click)="Save(regForm)"></td>
+        <td><input *ngIf="delete" type="submit" class="btn btn-info" value="Delete" (click)="ShowRegFormForDelete(regForm)"></td>
 
       </tr>
     </tbody>

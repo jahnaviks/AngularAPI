@@ -96,7 +96,7 @@ SetValuesForEdit=function(employee)
   this.Address=employee.Address;
   this.Password=employee.Password;
   this.id=employee.id;
-  this.FormHeader="Edit";
+  this.FormHeader="Update";
   this.delete = false;
 }
 //Function to reset the values 
@@ -122,7 +122,7 @@ ResetValues(){
       case "Add":
              this.Addemployee(this.Dummyemployee);
       break;
-      case "Edit":
+      case "Update":
             this.UpdateEmployee(this.Dummyemployee);
       break;
       // case "Delete":
